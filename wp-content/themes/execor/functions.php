@@ -64,6 +64,13 @@ function execor_enqueue_cursor_glow() {
 		'1.0.0',
 		true
 	);
+	wp_enqueue_script(
+		'cursor-spotlight',
+		get_template_directory_uri() . '/js/cursor-spotlight.js',
+		array(),
+		'1.0.0',
+		true
+	);
 }
 
 // build: 2bfb5315bdb2a4d20567c9ab80aa23140728ee97
