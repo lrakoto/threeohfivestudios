@@ -54,24 +54,12 @@ if ( class_exists( 'Vamtam_Importers_E' ) && is_callable( array( 'Vamtam_Importe
 	Vamtam_Importers_E::set_menu_locations();
 }
 
-// Cursor dot grid effect (hidden for now)
-// add_action( 'wp_enqueue_scripts', 'execor_enqueue_cursor_glow' );
-// function execor_enqueue_cursor_glow() {
-// 	wp_enqueue_script(
-// 		'cursor-glow',
-// 		get_template_directory_uri() . '/js/cursor-glow.js',
-// 		array(),
-// 		'1.0.0',
-// 		true
-// 	);
-// }
-
-// Cursor tendrils effect
-add_action( 'wp_enqueue_scripts', 'execor_enqueue_cursor_tendrils' );
-function execor_enqueue_cursor_tendrils() {
+// Cursor dot grid effect
+add_action( 'wp_enqueue_scripts', 'execor_enqueue_cursor_glow' );
+function execor_enqueue_cursor_glow() {
 	wp_enqueue_script(
-		'cursor-tendrils',
-		get_template_directory_uri() . '/js/cursor-tendrils.js',
+		'cursor-glow',
+		get_template_directory_uri() . '/js/cursor-glow.js',
 		array(),
 		'1.0.0',
 		true
