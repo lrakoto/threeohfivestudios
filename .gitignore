@@ -1,0 +1,22 @@
+# SSH keys - never commit these
+*.pem
+id_rsa
+id_rsa.pub
+godaddy_deploy
+godaddy_deploy.pub
+
+# Theme sample data (may contain third-party tokens)
+wp-content/themes/execor/samples/
+
+# WordPress
+wp-content/uploads/
+wp-content/cache/
+wp-config.php
+*.log
+error_log
+
+# OS
+.DS_Store
+
+# Node
+node_modules/
