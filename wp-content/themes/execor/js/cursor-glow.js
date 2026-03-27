@@ -53,8 +53,8 @@
         proximity = proximity * proximity;
 
         // base dot opacity + glow boost
-        var baseOpacity = 0.1;
-        var glowOpacity = proximity * 0.55;
+        var baseOpacity = 0.05;
+        var glowOpacity = proximity * 0.2;
         var opacity = baseOpacity + glowOpacity;
 
         ctx.beginPath();
