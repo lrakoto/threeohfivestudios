@@ -54,4 +54,16 @@ if ( class_exists( 'Vamtam_Importers_E' ) && is_callable( array( 'Vamtam_Importe
 	Vamtam_Importers_E::set_menu_locations();
 }
 
+// Cursor glow dot grid effect
+add_action( 'wp_enqueue_scripts', 'execor_enqueue_cursor_glow' );
+function execor_enqueue_cursor_glow() {
+	wp_enqueue_script(
+		'cursor-glow',
+		get_template_directory_uri() . '/js/cursor-glow.js',
+		array(),
+		'1.0.0',
+		true
+	);
+}
+
 // build: 2bfb5315bdb2a4d20567c9ab80aa23140728ee97
