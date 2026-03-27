@@ -5,9 +5,9 @@
   var hasEntered = false;
   var ACCENT = { r: 15, g: 61, b: 58 }; // #0F3D3A
 
-  var POINTS = 28;
-  var SPRING = 0.10;
-  var FRICTION = 0.75;
+  var POINTS = 36;
+  var SPRING = 0.08;
+  var FRICTION = 0.78;
 
   // Two edge strands that define the ribbon width
   var strandA = [];
@@ -68,7 +68,7 @@
     }
 
     // Ribbon width tapers from head to tail
-    var ribbonWidth = 10;
+    var ribbonWidth = 5;
 
     // Head of both strands anchors near cursor, offset perpendicular to movement
     var dx = strandA[0].vx;
@@ -78,7 +78,7 @@
     var ny = dx / speed;
 
     // Gentle twist: offset rotates slowly over time
-    var twist = Math.sin(time * 0.6) * ribbonWidth * 0.5;
+    var twist = Math.sin(time * 0.25) * ribbonWidth * 0.6;
     var targetAx = mouse.x + nx * (ribbonWidth + twist);
     var targetAy = mouse.y + ny * (ribbonWidth + twist);
     var targetBx = mouse.x - nx * (ribbonWidth - twist);
@@ -137,8 +137,8 @@
       strandA[0].x, strandA[0].y,
       strandA[POINTS - 1].x, strandA[POINTS - 1].y
     );
-    grad.addColorStop(0, 'rgba(' + ACCENT.r + ',' + ACCENT.g + ',' + ACCENT.b + ',0.12)');
-    grad.addColorStop(0.4, 'rgba(' + ACCENT.r + ',' + ACCENT.g + ',' + ACCENT.b + ',0.07)');
+    grad.addColorStop(0, 'rgba(' + ACCENT.r + ',' + ACCENT.g + ',' + ACCENT.b + ',0.10)');
+    grad.addColorStop(0.3, 'rgba(' + ACCENT.r + ',' + ACCENT.g + ',' + ACCENT.b + ',0.05)');
     grad.addColorStop(1, 'rgba(' + ACCENT.r + ',' + ACCENT.g + ',' + ACCENT.b + ',0.0)');
 
     ctx.fillStyle = grad;
