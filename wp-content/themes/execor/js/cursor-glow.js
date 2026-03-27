@@ -1,8 +1,8 @@
 (function () {
   var canvas, ctx, mouse = { x: -9999, y: -9999 };
   var DOT_SPACING = 28;
-  var DOT_RADIUS = 1.2;
-  var GLOW_RADIUS = 280;
+  var DOT_RADIUS = 1.0;
+  var GLOW_RADIUS = 260;
   var ACCENT = { r: 15, g: 61, b: 58 }; // #0F3D3A
 
   function init() {
@@ -16,6 +16,7 @@
       'height:100%',
       'pointer-events:none',
       'z-index:0',
+      'mix-blend-mode:overlay',
     ].join(';');
     document.body.insertBefore(canvas, document.body.firstChild);
     ctx = canvas.getContext('2d');
@@ -53,8 +54,8 @@
         proximity = proximity * proximity;
 
         // base dot opacity + glow boost
-        var baseOpacity = 0.1;
-        var glowOpacity = proximity * 0.55;
+        var baseOpacity = 0.055;
+        var glowOpacity = proximity * 0.28;
         var opacity = baseOpacity + glowOpacity;
 
         ctx.beginPath();
