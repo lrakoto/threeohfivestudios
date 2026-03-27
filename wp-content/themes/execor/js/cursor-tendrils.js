@@ -2,25 +2,16 @@
   var canvas, ctx;
   var time = 0;
   var mouse = { x: -9999, y: -9999 };
-  var origin = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-  var lastMouse = { x: -9999, y: -9999 };
-  var mouseVel = { x: 0, y: 0 };
-  var isMoving = false;
-  var moveTimeout;
-
-  var NUM_TENDRILS = 5;
-  var POINTS = 14;
+  var hasEntered = false;
   var ACCENT = { r: 15, g: 61, b: 58 }; // #0F3D3A
 
-  var tendrils = [];
+  var POINTS = 28;
+  var SPRING = 0.10;
+  var FRICTION = 0.75;
 
-  var tendrilDefs = [
-    { freq: 1.0,  freqY: 0.7,  amp: 48, phase: 0,                   spring: 0.10, friction: 0.82 },
-    { freq: 0.85, freqY: 1.1,  amp: 38, phase: Math.PI * 0.4,       spring: 0.09, friction: 0.80 },
-    { freq: 1.2,  freqY: 0.9,  amp: 55, phase: Math.PI * 0.8,       spring: 0.11, friction: 0.84 },
-    { freq: 0.7,  freqY: 1.3,  amp: 32, phase: Math.PI * 1.2,       spring: 0.08, friction: 0.79 },
-    { freq: 1.1,  freqY: 0.6,  amp: 44, phase: Math.PI * 1.6,       spring: 0.10, friction: 0.83 },
-  ];
+  // Two edge strands that define the ribbon width
+  var strandA = [];
+  var strandB = [];
 
   function init() {
     canvas = document.createElement('canvas');
@@ -38,13 +29,9 @@
     ctx = canvas.getContext('2d');
     resize();
 
-    // Init tendrils
-    for (var i = 0; i < NUM_TENDRILS; i++) {
-      var pts = [];
-      for (var j = 0; j < POINTS; j++) {
-        pts.push({ x: origin.x, y: origin.y, vx: 0, vy: 0 });
-      }
-      tendrils.push({ points: pts, def: tendrilDefs[i] });
+    for (var i = 0; i < POINTS; i++) {
+      strandA.push({ x: -9999, y: -9999, vx: 0, vy: 0 });
+      strandB.push({ x: -9999, y: -9999, vx: 0, vy: 0 });
     }
 
     window.addEventListener('resize', resize);
@@ -53,17 +40,17 @@
   }
 
   function onMouseMove(e) {
-    mouseVel.x = e.clientX - mouse.x;
-    mouseVel.y = e.clientY - mouse.y;
     mouse.x = e.clientX;
     mouse.y = e.clientY;
-
-    // Smoothly move origin toward cursor
-    isMoving = true;
-    clearTimeout(moveTimeout);
-    moveTimeout = setTimeout(function () {
-      isMoving = false;
-    }, 120);
+    if (!hasEntered) {
+      for (var i = 0; i < POINTS; i++) {
+        strandA[i].x = mouse.x;
+        strandA[i].y = mouse.y;
+        strandB[i].x = mouse.x;
+        strandB[i].y = mouse.y;
+      }
+      hasEntered = true;
+    }
   }
 
   function resize() {
@@ -72,76 +59,102 @@
   }
 
   function loop() {
-    time += 0.012;
-
-    // Ease origin toward cursor
-    var easeFactor = isMoving ? 0.12 : 0.04;
-    origin.x += (mouse.x - origin.x) * easeFactor;
-    origin.y += (mouse.y - origin.y) * easeFactor;
-
+    time += 0.016;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (var i = 0; i < tendrils.length; i++) {
-      var t = tendrils[i];
-      var d = t.def;
-
-      // Tendril head orbits origin
-      var orbitScale = isMoving ? 0.3 : 1.0;
-      var headX = origin.x + Math.cos(time * d.freq + d.phase) * d.amp * orbitScale;
-      var headY = origin.y + Math.sin(time * d.freqY + d.phase) * d.amp * 0.6 * orbitScale;
-
-      // Spring head toward orbit target
-      var head = t.points[0];
-      head.vx += (headX - head.x) * d.spring;
-      head.vy += (headY - head.y) * d.spring;
-      head.vx *= d.friction;
-      head.vy *= d.friction;
-      head.x += head.vx;
-      head.y += head.vy;
-
-      // Each subsequent point follows the one before
-      for (var j = 1; j < POINTS; j++) {
-        var prev = t.points[j - 1];
-        var curr = t.points[j];
-        curr.vx += (prev.x - curr.x) * (d.spring * 0.7);
-        curr.vy += (prev.y - curr.y) * (d.spring * 0.7);
-        curr.vx *= d.friction;
-        curr.vy *= d.friction;
-        curr.x += curr.vx;
-        curr.y += curr.vy;
-      }
-
-      drawTendril(t.points);
+    if (!hasEntered) {
+      requestAnimationFrame(loop);
+      return;
     }
 
+    // Ribbon width tapers from head to tail
+    var ribbonWidth = 10;
+
+    // Head of both strands anchors near cursor, offset perpendicular to movement
+    var dx = strandA[0].vx;
+    var dy = strandA[0].vy;
+    var speed = Math.sqrt(dx * dx + dy * dy) || 0.001;
+    var nx = -dy / speed;
+    var ny = dx / speed;
+
+    // Gentle twist: offset rotates slowly over time
+    var twist = Math.sin(time * 0.6) * ribbonWidth * 0.5;
+    var targetAx = mouse.x + nx * (ribbonWidth + twist);
+    var targetAy = mouse.y + ny * (ribbonWidth + twist);
+    var targetBx = mouse.x - nx * (ribbonWidth - twist);
+    var targetBy = mouse.y - ny * (ribbonWidth - twist);
+
+    // Spring head of each strand toward target
+    updatePoint(strandA[0], targetAx, targetAy, SPRING * 1.4, FRICTION);
+    updatePoint(strandB[0], targetBx, targetBy, SPRING * 1.4, FRICTION);
+
+    // Trail each point behind the one before it, with increasing lag
+    for (var i = 1; i < POINTS; i++) {
+      var lag = 1 - (i / POINTS) * 0.4;
+      updatePoint(strandA[i], strandA[i - 1].x, strandA[i - 1].y, SPRING * lag, FRICTION);
+      updatePoint(strandB[i], strandB[i - 1].x, strandB[i - 1].y, SPRING * lag, FRICTION);
+    }
+
+    drawRibbon();
     requestAnimationFrame(loop);
   }
 
-  function drawTendril(pts) {
-    if (pts.length < 2) return;
+  function updatePoint(pt, tx, ty, spring, friction) {
+    pt.vx += (tx - pt.x) * spring;
+    pt.vy += (ty - pt.y) * spring;
+    pt.vx *= friction;
+    pt.vy *= friction;
+    pt.x += pt.vx;
+    pt.y += pt.vy;
+  }
 
+  function drawRibbon() {
+    if (strandA.length < 2) return;
     ctx.save();
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
 
-    // Draw segments with fading opacity toward tail
-    for (var i = 0; i < pts.length - 1; i++) {
-      var progress = 1 - i / (pts.length - 1);
-      var opacity = progress * progress * 0.18;
-      var width = progress * 1.8;
+    // Build ribbon as a filled path from strandA forward, strandB backward
+    ctx.beginPath();
+    ctx.moveTo(strandA[0].x, strandA[0].y);
 
-      ctx.beginPath();
-      ctx.moveTo(pts[i].x, pts[i].y);
-
-      // Smooth curve through midpoints
-      var mx = (pts[i].x + pts[i + 1].x) / 2;
-      var my = (pts[i].y + pts[i + 1].y) / 2;
-      ctx.quadraticCurveTo(pts[i].x, pts[i].y, mx, my);
-
-      ctx.strokeStyle = 'rgba(' + ACCENT.r + ',' + ACCENT.g + ',' + ACCENT.b + ',' + opacity.toFixed(3) + ')';
-      ctx.lineWidth = width;
-      ctx.stroke();
+    for (var i = 1; i < POINTS - 1; i++) {
+      var mx = (strandA[i].x + strandA[i + 1].x) * 0.5;
+      var my = (strandA[i].y + strandA[i + 1].y) * 0.5;
+      ctx.quadraticCurveTo(strandA[i].x, strandA[i].y, mx, my);
     }
+    ctx.lineTo(strandA[POINTS - 1].x, strandA[POINTS - 1].y);
+    ctx.lineTo(strandB[POINTS - 1].x, strandB[POINTS - 1].y);
+
+    for (var j = POINTS - 2; j > 0; j--) {
+      var mx2 = (strandB[j].x + strandB[j + 1].x) * 0.5;
+      var my2 = (strandB[j].y + strandB[j + 1].y) * 0.5;
+      ctx.quadraticCurveTo(strandB[j + 1].x, strandB[j + 1].y, mx2, my2);
+    }
+    ctx.lineTo(strandB[0].x, strandB[0].y);
+    ctx.closePath();
+
+    // Gradient from head (more visible) to tail (transparent)
+    var grad = ctx.createLinearGradient(
+      strandA[0].x, strandA[0].y,
+      strandA[POINTS - 1].x, strandA[POINTS - 1].y
+    );
+    grad.addColorStop(0, 'rgba(' + ACCENT.r + ',' + ACCENT.g + ',' + ACCENT.b + ',0.12)');
+    grad.addColorStop(0.4, 'rgba(' + ACCENT.r + ',' + ACCENT.g + ',' + ACCENT.b + ',0.07)');
+    grad.addColorStop(1, 'rgba(' + ACCENT.r + ',' + ACCENT.g + ',' + ACCENT.b + ',0.0)');
+
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // Subtle edge stroke along strandA
+    ctx.beginPath();
+    ctx.moveTo(strandA[0].x, strandA[0].y);
+    for (var k = 1; k < POINTS - 1; k++) {
+      var emx = (strandA[k].x + strandA[k + 1].x) * 0.5;
+      var emy = (strandA[k].y + strandA[k + 1].y) * 0.5;
+      ctx.quadraticCurveTo(strandA[k].x, strandA[k].y, emx, emy);
+    }
+    ctx.strokeStyle = 'rgba(' + ACCENT.r + ',' + ACCENT.g + ',' + ACCENT.b + ',0.10)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
 
     ctx.restore();
   }
