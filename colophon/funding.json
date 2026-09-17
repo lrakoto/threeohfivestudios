@@ -1,0 +1,352 @@
+{
+  "version": "v1.0.0",
+  "entity": {
+    "type": "individual",
+    "role": "owner",
+    "name": "Lova Rakotomavonandrianina",
+    "email": "TODO@threeohfivestudios.com",
+    "description": "Creative and web developer in Los Angeles, working as ThreeOhFive Studios. Builds browser-native games, portfolio pieces and experiments, largely in collaboration with AI agents.",
+    "webpageUrl": {
+      "url": "https://threeohfivestudios.com"
+    }
+  },
+  "projects": [
+    {
+      "guid": "blockshooter",
+      "name": "Block Shooter",
+      "description": "Browser-based twin-stick survival shooter in vanilla HTML, CSS and JavaScript. No frameworks, no build step, no dependencies.",
+      "webpageUrl": {
+        "url": "https://lrakoto.github.io/blockshooter/"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/Block Shooter"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "game",
+        "javascript",
+        "canvas",
+        "no-build"
+      ]
+    },
+    {
+      "guid": "monolith",
+      "name": "Monolith",
+      "description": "Single-page Three.js portfolio scene for ThreeOhFive Studios. One file, no build step.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/Monolith"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/Monolith"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "three.js",
+        "webgl",
+        "portfolio",
+        "html"
+      ]
+    },
+    {
+      "guid": "auto-dex",
+      "name": "auto-dex",
+      "description": "A searchable exotic cars database with customizable profiles.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/auto-dex"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/auto-dex"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "javascript",
+        "database"
+      ]
+    },
+    {
+      "guid": "pyxel2",
+      "name": "Pyxel2",
+      "description": "Pixel-art tooling experiment.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/Pyxel2"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/Pyxel2"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "typescript"
+      ]
+    },
+    {
+      "guid": "pyxel-2",
+      "name": "Pyxel-2",
+      "description": "Pixel-art tooling experiment.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/Pyxel-2"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/Pyxel-2"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "typescript"
+      ]
+    },
+    {
+      "guid": "pyxel",
+      "name": "Pyxel",
+      "description": "Pixel-art tooling experiment.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/Pyxel"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/Pyxel"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "typescript"
+      ]
+    },
+    {
+      "guid": "microtrader",
+      "name": "microtrader",
+      "description": "Trading experiment in Python.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/microtrader"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/microtrader"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "python"
+      ]
+    },
+    {
+      "guid": "finalcycle",
+      "name": "FinalCycle",
+      "description": "Web project.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/FinalCycle"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/FinalCycle"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "html"
+      ]
+    },
+    {
+      "guid": "eventi",
+      "name": "eventi",
+      "description": "Events web app.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/eventi"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/eventi"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "typescript"
+      ]
+    },
+    {
+      "guid": "cinesite",
+      "name": "CineSite",
+      "description": "Film-site design build.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/CineSite"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/CineSite"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "css",
+        "html"
+      ]
+    },
+    {
+      "guid": "aero",
+      "name": "aero",
+      "description": "Web project.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/aero"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/aero"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "javascript"
+      ]
+    },
+    {
+      "guid": "305studios",
+      "name": "305Studios",
+      "description": "ThreeOhFive Studios site build.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/305Studios"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/305Studios"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "typescript"
+      ]
+    },
+    {
+      "guid": "studio",
+      "name": "studio",
+      "description": "Studio site build.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/studio"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/studio"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "css",
+        "html"
+      ]
+    },
+    {
+      "guid": "trano",
+      "name": "trano",
+      "description": "Web app.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/trano"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/trano"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "typescript"
+      ]
+    },
+    {
+      "guid": "particleplayground",
+      "name": "ParticlePlayground",
+      "description": "Canvas particle experiments.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/ParticlePlayground"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/ParticlePlayground"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "html",
+        "canvas"
+      ]
+    },
+    {
+      "guid": "openc",
+      "name": "openc",
+      "description": "Web experiment.",
+      "webpageUrl": {
+        "url": "https://github.com/lrakoto/openc"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/openc"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "html"
+      ]
+    },
+    {
+      "guid": "threeohfivestudios",
+      "name": "threeohfivestudios",
+      "description": "ThreeOhFive Studios — the studio site, and the source of truth for authorship and support terms.",
+      "webpageUrl": {
+        "url": "https://threeohfivestudios.com"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/lrakoto/threeohfivestudios"
+      },
+      "licenses": [
+        "spdx:NOASSERTION"
+      ],
+      "tags": [
+        "php",
+        "wordpress",
+        "identity"
+      ]
+    }
+  ],
+  "funding": {
+    "channels": [
+      {
+        "guid": "usdc-base",
+        "type": "other",
+        "address": "0x23178a649a868ff0b8280125982a0fb9e9016164",
+        "description": "Native USDC on Base (chain id 8453). Receive-only address published for attribution and voluntary support."
+      }
+    ],
+    "plans": [
+      {
+        "guid": "tip-any",
+        "status": "active",
+        "name": "Voluntary support",
+        "description": "Any amount, one time. No entitlement, no support obligation, nothing gated behind it.",
+        "amount": 0,
+        "currency": "USD",
+        "frequency": "one-time",
+        "channels": [
+          "usdc-base"
+        ]
+      },
+      {
+        "guid": "agent-x402",
+        "status": "planned",
+        "name": "Machine-payable support (x402)",
+        "description": "Planned HTTP 402 endpoint so an agent acting under its own principal's budget and policy can pay programmatically and receive a receipt. Specification: https://github.com/lrakoto/threeohfivestudios/blob/main/colophon/docs/x402-tip-endpoint.md",
+        "amount": 0,
+        "currency": "USD",
+        "frequency": "one-time",
+        "channels": [
+          "usdc-base"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Colophon — ThreeOhFive Studios</title>
+<meta name="author" content="Lova Rakotomavonandrianina">
+<link rel="author" href="https://threeohfivestudios.com">
+<meta name="description" content="Authorship and support terms for ThreeOhFive Studios work.">
+<style>
+  :root {
+    --bg: #14161c; --fg: #e8ecf4; --muted: #8b93a7; --accent: #1bffc1;
+    --line: rgba(255,255,255,0.12); --code: rgba(255,255,255,0.05);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f6f7f9; --fg: #1a1d26; --muted: #5a6275; --accent: #0a7d61;
+      --line: rgba(0,0,0,0.12); --code: rgba(0,0,0,0.04);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font: 16px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 0 16px;
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 72px 0 96px; }
+  h1 { font-size: 1.6rem; letter-spacing: -0.01em; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 40px; }
+  h2 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.14em;
+       color: var(--muted); margin: 40px 0 12px; font-weight: 600; }
+  p { margin: 0 0 16px; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover { border-bottom-color: currentColor; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 20px; margin: 0; }
+  dt { color: var(--muted); }
+  dd { margin: 0; word-break: break-all; }
+  code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.86em; }
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; background: var(--code); }
+  footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.86rem; }
+  .note { color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Colophon</h1>
+  <p class="sub">Authorship and support terms for ThreeOhFive Studios work.</p>
+
+  <p>Hi, I'm Lova Rakotomavonandrianina — a creative in Los Angeles, born in
+  Madagascar in 1990. I build browser-native games, portfolio pieces and
+  experiments, mostly in collaboration with AI. If something here was useful,
+  interesting or amusing, support is welcome and buys nothing.</p>
+
+  <h2>Terms as data</h2>
+  <div class="card">
+    <dl>
+      <dt>Manifest</dt><dd><a href="funding.json">funding.json</a></dd>
+      <dt>Discovery</dt><dd class="mono">/.well-known/funding-manifest-urls</dd>
+      <dt>Source</dt><dd><a href="https://github.com/lrakoto/threeohfivestudios">github.com/lrakoto/colophon</a></dd>
+    </dl>
+  </div>
+
+  <h2>Support</h2>
+  <div class="card">
+    <dl>
+      <dt>Asset</dt><dd>Native USDC</dd>
+      <dt>Network</dt><dd>Base (chain id 8453)</dd>
+      <dt>Address</dt><dd class="mono">0x23178a649a868ff0b8280125982a0fb9e9016164</dd>
+    </dl>
+  </div>
+  <p class="note" style="margin-top:14px">Receive-only. Verify the address
+  against <a href="funding.json">funding.json</a> before sending anything —
+  and note that this manifest is <strong>unsigned v0</strong>, so nothing
+  cryptographically binds that address to me yet.</p>
+
+  <h2>For machine clients</h2>
+  <p>A callable, receipted endpoint is specified but
+  <strong>not deployed</strong>:
+  <a href="https://github.com/lrakoto/threeohfivestudios/blob/main/colophon/docs/x402-tip-endpoint.md">x402-tip-endpoint.md</a>.
+  Nothing on this page asks any agent to take an action; it states terms for
+  readers whose own policy already permits acting on them.</p>
+
+  <footer>
+    <a href="https://threeohfivestudios.com">threeohfivestudios.com</a>
+  </footer>
+</main>
+</body>
+</html>
