@@ -14,8 +14,17 @@ WordPress portfolio site for threeohfivestudios.com. Built with Elementor + Exec
 ## Theme
 Active theme: `wp-content/themes/execor/` (Execor v19 by VamTam)
 
+## Site Copy
+- No em dashes in text visitors read. Use a comma or a period instead, rewording the sentence if that reads better
+
 ## What's Been Built
-- **Recent Work section** on home page — first card is "Gundry MD" with `GundryMD1.webp` image and "Learn More" button linking to `/recent-work-gundry-md/`
+- **Recent Work section** on home page — AutoDex (`autodx.io`), Gundry MD, AERO (`/aero/`), 305 Studios (`/portfolio/`)
+  - It is one Elementor HTML widget (`ef8e188`) on the Home page (ID 9942), so it lives in the database, not in `wp-content/` — git never sees it
+  - Each project is a `.rw-project` in the list plus a `.rw-img-slot` at the same index; images are WebP in the media library
+  - "Learn More" case studies: `/recent-work-autodex/` (987970), `/recent-work-gundry-md/` (987830), `/recent-work-aero/` (987959), `/recent-work-305-studios/` (987961). AutoDex, AERO and 305 Studios are clones of the Gundry page's Elementor layout with new content, so a new case study can be made the same way
+  - To change it: `ssh-add ~/.ssh/godaddy_deploy` (the key has a passphrase), then WP-CLI in `~/public_html/threeohfivestudios.com` — back up `_elementor_data` for 9942, `wp media import` new images, and save the widget through Elementor's document API with `wp eval-file … --user=lovarakoto` so it lands as a revision
+  - Claude's auto mode blocks writes to the server and won't let Claude add permission rules — for server steps, turn auto mode off so each command asks first, or run the script yourself with `!`
+  - The site root currently 302s to `/portfolio/` (the monolith project); this home page is at `/?home=1`
 - **Cursor effect** — dot grid that glows and follows the cursor, active site-wide
   - `js/cursor-glow.js` — active version (subtle dot grid)
   - `js/cursor-tendrils.js` — tendril/tadpole version (built, kept on standby)
